@@ -16,7 +16,7 @@ public class MenuPrincipal {
         int opt = 0;
 
         while (seguir){
-            System.out.println("=========Sistema Renting de Carros=========");
+            System.out.println("\n========Sistema Renting de Carros=========");
             System.out.println("1) Gestion de clientes");
             System.out.println("2) Gestion de vehiculos");
             System.out.println("3) Gestion de contratos de renting");
@@ -24,7 +24,7 @@ public class MenuPrincipal {
             System.out.println("5) Salir del sistema");
             System.out.println("Seleccione una opción:");
             opt = v.ValidarEntero(sc);
-            opt = v.ValidarRango(1, 5, opt, sc);
+            opt = v.ValidarRango(1, 5, sc);
             switch (opt){
                 case 1:
                     MenuClientes.Menu(VClientes, VVehiculos, VContratos);
@@ -42,6 +42,8 @@ public class MenuPrincipal {
                     seguir = false;
                     System.out.println("Gracias por usar el sistema Renting de Carros. ¡Hasta luego!");
                     break;
+                default:
+                    System.out.println("Opcion no valida, intentar nuevamente");
             }
         }
     }

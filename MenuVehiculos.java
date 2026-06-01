@@ -21,7 +21,7 @@ public class MenuVehiculos {
             System.out.print("Seleccione una opcion: ");
 
             opt = v.ValidarEntero(sc);
-            opt = v.ValidarRango(1, 5, opt, sc);
+            opt = v.ValidarRango(1, 5, sc);
 
             switch (opt) {
                 case 1:
@@ -44,6 +44,8 @@ public class MenuVehiculos {
                     seguir = false;
                     System.out.println("Volviendo al menu principal...");
                     break;
+                default:
+                    System.out.println("Opcion no valida");
             }
         }
     }

@@ -43,6 +43,8 @@ public class MenuContratos {
                     seguir = false;
                     System.out.println("Volviendo al menu principal...");
                     break;
+                default:
+                    System.out.println("Opcion no valida");
             }
         }
     }
