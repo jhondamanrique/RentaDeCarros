@@ -19,7 +19,7 @@ public class MenuClientes {
             System.err.println("5) Volver al menu principal");
             System.out.println("Seleccione una opción:");
             opt = v.ValidarEntero(sc);
-            opt = v.ValidarRango(1, 5, opt, sc);
+            opt = v.ValidarRango(1, 5, sc);
             switch (opt){
                 case 1:
                     gc.RegistrarCliente(clientes, sc);
@@ -36,6 +36,9 @@ public class MenuClientes {
                 case 5:
                     seguir = false;
                     System.out.println("Volviendo al menu principal...");
+                    break;
+                default:
+                    System.out.println("Opcion no valida");
                     break;
             }
         }
