@@ -1,34 +1,49 @@
+import java.util.LinkedList;
+import java.util.Scanner;
+
 public class MenuPrincipal {
-    private Validaciones v = new Validaciones();
-    public void mostrarMenuPrincipal(){
-        int opcion;
-        do{
-            System.out.println("===== SISTEMA RENTING CARROS =====");
-            System.out.println("1. Gestión clientes");
-            System.out.println("2. Gestión vehículos");
-            System.out.println("3. Gestión contratos");
-            System.out.println("4. Informe general");
-            System.out.println("5. Salir");
-            opcion = v.leerNumero();
-            switch(opcion){
+    public static void Menu(){
+
+        Scanner sc = new Scanner(System.in);
+        Validaciones v = new Validaciones();
+
+        LinkedList<Cliente> VClientes = new LinkedList<>();
+        LinkedList<Vehiculo> VVehiculos = new LinkedList<>();
+        LinkedList<ContratoRenting> VContratos = new LinkedList<>();
+        System.out.println("Sistema Renting de Carros - Menu Principal");
+
+        boolean seguir = true;
+        int opt = 0;
+
+        while (seguir){
+            System.out.println("=========Sistema Renting de Carros=========");
+            System.out.println("1) Gestion de clientes");
+            System.out.println("2) Gestion de vehiculos");
+            System.out.println("3) Gestion de contratos de renting");
+            System.out.println("4) Imprimir informe general");
+            System.out.println("5) Salir del sistema");
+            System.out.println("Seleccione una opción:");
+            opt = v.ValidarEntero(sc);
+            opt = v.ValidarRango(1, 5, opt, sc);
+            switch (opt){
                 case 1:
-                    System.out.println("Gestión clientes");
+                    MenuClientes.Menu(VClientes, VVehiculos, VContratos);
                     break;
                 case 2:
-                    System.out.println("Gestión vehículos");
+                    MenuVehiculos.Menu(VVehiculos, VContratos);
                     break;
                 case 3:
-                    System.out.println("Gestión contratos");
+                    MenuContratos.Menu(VClientes, VVehiculos, VContratos);
                     break;
                 case 4:
-                    System.out.println("Informe");
+                    Informe.ImprimirInforme(VClientes, VVehiculos, VContratos);
                     break;
                 case 5:
-                    System.out.println("Finalizando...");
+                    seguir = false;
+                    System.out.println("Gracias por usar el sistema Renting de Carros. ¡Hasta luego!");
                     break;
-                default:
-                    System.out.println("Opción inválida");
             }
-        }while(opcion != 5);
+        }
     }
+
 }
