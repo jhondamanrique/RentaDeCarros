@@ -28,7 +28,7 @@ public class MenuContratos {
                     break;
 
                 case 2:
-                    gr.ModificarContrato(contratos, sc);
+                    gr.ModificarContrato(contratos, clientes, vehiculos, sc);
                     break;
 
                 case 3:
@@ -36,7 +36,7 @@ public class MenuContratos {
                     break;
 
                 case 4:
-                    gr.BuscarContrato(contratos, sc);
+                    gr.BuscarContrato(contratos, sc, clientes);
                     break;
 
                 case 5:
