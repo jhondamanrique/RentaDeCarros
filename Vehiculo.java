@@ -4,15 +4,17 @@ public class Vehiculo {
     private int Modelo;
     private float PrecioDiario;
     private String Estado;
+    private boolean ContratoActivo;
     public Vehiculo(){
     }
-    public Vehiculo(String placa, String marca, int modelo, float precioDiario, String estado){
-        Placa = placa;
-        Marca = marca;
-        Modelo = modelo;
-        PrecioDiario = precioDiario;
-        Estado = estado;
+    public Vehiculo(String placa, String marca, int modelo, float precioDiario, boolean ContratoActivo) {
+        this.Placa = placa;
+        this.Marca = marca;
+        this.Modelo = modelo;
+        this.PrecioDiario = precioDiario;
+        this.ContratoActivo = ContratoActivo;
     }
+    
     public String getPlaca(){
         return Placa;
     }
@@ -49,5 +51,11 @@ public class Vehiculo {
         System.out.println("Modelo: " + Modelo);
         System.out.println("Precio diario: " + PrecioDiario);
         System.out.println("Estado: " + Estado);
+    }
+    public boolean isContratoActivo() {
+        return ContratoActivo;
+    }
+    public void setContratoActivo(boolean contratoActivo) {
+        ContratoActivo = contratoActivo;
     }
 }
