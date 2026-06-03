@@ -2,7 +2,7 @@ import java.time.LocalDate;
 
 public class ContratoRenting {
     private int IdContrato;
-    private String CedulaCliente;
+    private int  CedulaCliente;
     private String PlacaVehiculo;
     private LocalDate FechaInicio;
     private LocalDate FechaFin;
@@ -10,7 +10,7 @@ public class ContratoRenting {
     private float ValorTotal;
     public ContratoRenting(){
     }
-    public ContratoRenting(int idContrato, String cedulaCliente, String placaVehiculo, LocalDate fechaInicio, LocalDate fechaFin, int totalDias, float valorTotal){
+    public ContratoRenting(int idContrato, int cedulaCliente, String placaVehiculo, LocalDate fechaInicio, LocalDate fechaFin, int totalDias, float valorTotal){
         IdContrato = idContrato;
         CedulaCliente = cedulaCliente;
         PlacaVehiculo = placaVehiculo;
@@ -25,10 +25,10 @@ public class ContratoRenting {
     public void setIdContrato(int idContrato){
         IdContrato = idContrato;
     }
-    public String getCedulaCliente(){
+    public int  getCedulaCliente(){
         return CedulaCliente;
     }
-    public void setCedulaCliente(String cedulaCliente){
+    public void setCedulaCliente(int cedulaCliente){
         CedulaCliente = cedulaCliente;
     }
     public String getPlacaVehiculo(){
