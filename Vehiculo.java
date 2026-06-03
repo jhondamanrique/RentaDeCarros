@@ -24,7 +24,7 @@ public class Vehiculo {
     public String getMarca(){
         return Marca;
     }
-    public void setMarca(String marca){
+    public void setMarca (String marca){
         Marca = marca;
     }
     public int getModelo(){
