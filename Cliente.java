@@ -71,4 +71,15 @@ public class Cliente {
         System.out.println("Licencia: " + Licencia);
     }
 
+    @Override
+public String toString() {
+    return "Cedula: " + Cedula +
+            "\nNombre: " + Nombre +
+            "\nApellido: " + Apellido +
+            "\nTelefono: " + Telefono +
+            "\nDireccion: " + Direccion +
+            "\nLicencia: " + Licencia +
+            "\n----------------------------------";
+}
+
 }
