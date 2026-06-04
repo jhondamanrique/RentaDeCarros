@@ -18,7 +18,7 @@ public class MenuClientes {
             System.out.println("4) Buscar cliente");
             System.err.println("5) Volver al menu principal");
             System.out.println("Seleccione una opción:");
-            opt = v.ValidarEntero(sc);
+            opt = v.ValidarEnteroPositivo(sc);
             opt = v.ValidarRango(1, 5, sc);
             switch (opt){
                 case 1:
@@ -28,7 +28,7 @@ public class MenuClientes {
                     gc.ModificarCliente(clientes, sc);
                     break;
                 case 3:
-                    gc.EliminarCliente(clientes, contratos, sc);
+                    gc.EliminarCliente(clientes, contratos, sc, vehiculos);
                     break;
                 case 4:
                     gc.BuscarCliente(clientes, sc);
@@ -44,3 +44,4 @@ public class MenuClientes {
         }
     }
 }
+

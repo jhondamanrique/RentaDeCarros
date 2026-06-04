@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class MenuVehiculos {
-    public static void Menu(LinkedList<Vehiculo> vehiculos, LinkedList<ContratoRenting> contratos) {
+    public static void Menu(LinkedList<Vehiculo> vehiculos, LinkedList<ContratoRenting> contratos, LinkedList<Cliente> clientes) {
 
         Scanner sc = new Scanner(System.in);
         Validaciones v = new Validaciones();
@@ -20,7 +20,7 @@ public class MenuVehiculos {
             System.out.println("5) Volver al menu principal");
             System.out.print("Seleccione una opcion: ");
 
-            opt = v.ValidarEntero(sc);
+            opt = v.ValidarEnteroPositivo(sc);
             opt = v.ValidarRango(1, 5, sc);
 
             switch (opt) {
@@ -33,7 +33,7 @@ public class MenuVehiculos {
                     break;
 
                 case 3:
-                    gv.EliminarVehiculo(vehiculos, contratos, sc);
+                    gv.EliminarVehiculo(vehiculos, contratos, sc, clientes);
                     break;
 
                 case 4:
@@ -50,3 +50,4 @@ public class MenuVehiculos {
         }
     }
 }
+

@@ -23,14 +23,14 @@ public class MenuPrincipal {
             System.out.println("4) Imprimir informe general");
             System.out.println("5) Salir del sistema");
             System.out.println("Seleccione una opción:");
-            opt = v.ValidarEntero(sc);
+            opt = v.ValidarEnteroPositivo(sc);
             opt = v.ValidarRango(1, 5, sc);
             switch (opt){
                 case 1:
                     MenuClientes.Menu(VClientes, VVehiculos, VContratos);
                     break;
                 case 2:
-                    MenuVehiculos.Menu(VVehiculos, VContratos);
+                    MenuVehiculos.Menu(VVehiculos, VContratos,VClientes);
                     break;
                 case 3:
                     MenuContratos.Menu(VClientes, VVehiculos, VContratos);

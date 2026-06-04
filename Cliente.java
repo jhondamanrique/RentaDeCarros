@@ -1,5 +1,5 @@
 public class Cliente {
-    private String Cedula;
+    private int  Cedula;
     private String Nombre;
     private String Apellido;
     private int Telefono;
@@ -7,11 +7,11 @@ public class Cliente {
     private boolean Licencia;
     private boolean ContratoActivo;
 
-    public String getCedula() {
+    public int  getCedula() {
         return Cedula;
     }
 
-    public void setCedula(String cedula) {
+    public void setCedula(int cedula) {
         Cedula = cedula;
     }
 

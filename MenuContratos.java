@@ -32,7 +32,7 @@ public class MenuContratos {
                     break;
 
                 case 3:
-                    gr.FinalizarContrato(contratos, vehiculos, sc);
+                    gr.FinalizarContrato(contratos, vehiculos, sc, clientes);
                     break;
 
                 case 4:
@@ -49,3 +49,4 @@ public class MenuContratos {
         }
     }
 }
+
