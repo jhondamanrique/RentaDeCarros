@@ -10,7 +10,7 @@ public class GestionClientes {
         while (Bandera) {
             Cliente c = new Cliente();
             System.out.println("Ingrese la Cedula del cliente ");
-            int Cedula = v.ValidarEntero(sc);
+            int Cedula = v.ValidarCedulaInt(sc);
             Cliente encontrado = v.BuscarEnClientes(ListaClientes, Cedula);
             if (v.ValidarExistencia(encontrado)) {
                 continue;
@@ -21,7 +21,7 @@ public class GestionClientes {
             System.out.println("Ingrese el apellido ");
             c.setApellido(v.Solotexto(sc));
             System.out.println("Ingrese el telefono");
-            c.setTelefono(v.ValidarEntero(sc));
+            c.setTelefono(v.ValidarEnteroPositivo(sc));
             System.out.println("Ingrese la direccion ");
             c.setDireccion(v.TextoNoVacio(sc));
             System.out.println("Tiene licencia \n 1) Si.\n 2) No.");
@@ -45,7 +45,7 @@ public class GestionClientes {
 
     public LinkedList<Cliente> ModificarCliente(LinkedList<Cliente> ListaClientes, Scanner sc) {
         System.out.println("Ingrese la cedula que desea modificar ");
-        int ced = v.ValidarEntero(sc);
+        int ced = v.ValidarCedulaInt(sc);
         Cliente encontrado = v.BuscarEnClientes(ListaClientes, ced);
         if (v.ValidarExistencia(encontrado) == false) {
             System.out.println("Esta cedula no existe.");
@@ -76,7 +76,7 @@ public class GestionClientes {
                         break;
                     case 3:
                         System.out.println("Ingrese el nuevo telefono ");
-                        int NuevoTelefono = v.ValidarEntero(sc);
+                        int NuevoTelefono = v.ValidarEnteroPositivo(sc);
                         cdCliente.setTelefono(NuevoTelefono);
                         System.out.println("CAMBIO EXITOSO");
                         break;
@@ -98,14 +98,15 @@ public class GestionClientes {
                         }
                         break;
                     default:
-                            System.out.println("Ingrese la cedula nueva: ");
-                            int CedulaNueva = v.ValidarEntero(sc);
-                            Cliente clienteduplicado = v.BuscarEnClientes(ListaClientes, CedulaNueva);
-                            if(clienteduplicado != null){
-                                System.out.println("No se puede repetir cedulas. Ya existe un cliente con esta cedula ");
-                                break;}
-                            cdCliente.setCedula(CedulaNueva);
-                            System.out.println("CAMBIO EXITOSO");
+                        System.out.println("Ingrese la cedula nueva: ");
+                        int CedulaNueva = v.ValidarCedulaInt(sc);
+                        Cliente clienteduplicado = v.BuscarEnClientes(ListaClientes, CedulaNueva);
+                        if (clienteduplicado != null) {
+                            System.out.println("No se puede repetir cedulas. Ya existe un cliente con esta cedula ");
+                            break;
+                        }
+                        cdCliente.setCedula(CedulaNueva);
+                        System.out.println("CAMBIO EXITOSO");
                         break;
                 }
             }
@@ -114,13 +115,24 @@ public class GestionClientes {
     }
 
     public LinkedList<Cliente> EliminarCliente(LinkedList<Cliente> ListaClientes,
-            LinkedList<ContratoRenting> ListaContratos, Scanner sc) {
+            LinkedList<ContratoRenting> ListaContratos, Scanner sc, LinkedList<Vehiculo> ListaVehiculos) {
         System.out.println("Ingrese la cedula que desea eliminar ");
-        int ced = v.ValidarEntero(sc);
+        int ced = v.ValidarCedulaInt(sc);
         Cliente encontrado = v.BuscarEnClientes(ListaClientes, ced);
         if (v.ValidarExistencia(encontrado) == false) {
             System.out.println("Esta cedula no existe.");
             return ListaClientes;
+        }
+        if (encontrado.isContratoActivo()) {
+            System.out.println(
+                    "No se puede eliminar porque tiene un contrato activo. Desea eliminar el contrato? \n 1) Si. \n 2). No ");
+            int opt = v.ValidarRango(1, 2, sc);
+            if (opt == 1) {
+                GestionContratos gc = new GestionContratos();
+                gc.FinalizarContrato(ListaContratos, ListaVehiculos, sc, ListaClientes);
+            } else {
+                return ListaClientes;
+            }
         }
         ListaClientes.removeIf(c -> ced == c.getCedula());
         ListaContratos.removeIf(cont -> ced == cont.getCedulaCliente());
@@ -129,7 +141,7 @@ public class GestionClientes {
 
     public void BuscarCliente(LinkedList<Cliente> ListaClientes, Scanner sc) {
         System.out.println("Ingrese la cedula que desea ver su informacion ");
-        int ced = v.ValidarEntero(sc);
+        int ced = v.ValidarCedulaInt(sc);
         Cliente encontrado = v.BuscarEnClientes(ListaClientes, ced);
         if (v.ValidarExistencia(encontrado) == false) {
             System.out.println("Esta cedula no existe.");

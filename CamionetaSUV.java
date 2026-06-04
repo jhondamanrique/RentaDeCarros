@@ -1,19 +1,18 @@
 public class CamionetaSUV extends Vehiculo {
-    private String Traccion;
+    private String TipoTraccion;
     private float CapacidadMaletero;
     public CamionetaSUV(){
     }
-    public CamionetaSUV(String placa, String marca, int modelo, float precioDiario,
-            String estado, String traccion, float capacidadMaletero){
-        super(placa, marca, modelo, precioDiario, estado);
-        Traccion = traccion;
+    public CamionetaSUV(String placa, String marca, int modelo, float precioDiario, boolean ContratoActivo, String tipoTraccion, int capacidadMaletero) {
+        super(placa, marca, modelo, precioDiario, ContratoActivo);
+        TipoTraccion = tipoTraccion;
         CapacidadMaletero = capacidadMaletero;
     }
-    public String getTraccion(){
-        return Traccion;
+    public String getTipoTraccion(){
+        return TipoTraccion;
     }
-    public void setTraccion(String traccion){
-        Traccion = traccion;
+    public void setTipoTraccion(String tipoTraccion){
+        TipoTraccion = tipoTraccion;
     }
     public float getCapacidadMaletero(){
         return CapacidadMaletero;
@@ -23,7 +22,7 @@ public class CamionetaSUV extends Vehiculo {
     }
     public void mostrarVehiculo(){
         super.mostrarVehiculo();
-        System.out.println("Tracción: " + Traccion);
+        System.out.println("Tracción: " + TipoTraccion);
         System.out.println("Capacidad maletero: " + CapacidadMaletero);
     }
 }

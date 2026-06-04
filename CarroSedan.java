@@ -3,9 +3,8 @@ public class CarroSedan extends Vehiculo {
     private String Transmision;
     public CarroSedan(){
     }
-    public CarroSedan(String placa, String marca, int modelo, float precioDiario,
-            String estado, String tipoCombustible, String transmision){
-        super(placa, marca, modelo, precioDiario, estado);
+    public CarroSedan(String placa, String marca, int modelo, float precioDiario, boolean ContratoActivo, String tipoCombustible, String transmision) {
+        super(placa, marca, modelo, precioDiario, ContratoActivo);
         TipoCombustible = tipoCombustible;
         Transmision = transmision;
     }

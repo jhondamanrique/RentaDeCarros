@@ -10,14 +10,14 @@ public class GestionContratos {
         while (continuar) {
             ContratoRenting o = new ContratoRenting();
             System.out.println("Ingrese el ID del contrato (solo numeros) ");
-            int IdContrato = v.ValidarEntero(sc);
+            int IdContrato = v.ValidarEnteroPositivo(sc);
             ContratoRenting ContratoEncontrado = v.BuscarEnContratos(ListaContratos, IdContrato);
             if (v.ValidarExistencia(ContratoEncontrado)) {
                 continue;
             }
             o.setIdContrato(IdContrato);
             System.out.println("Ingrese la cedula del cliente ");
-            int Cedula = v.ValidarEntero(sc);
+            int Cedula = v.ValidarCedulaInt(sc);
             Cliente ClienteEncontrado = v.BuscarEnClientes(ListaClientes, Cedula);
             if (v.ValidarExistencia(ClienteEncontrado)) {
                 if (v.ContratoActivo(ClienteEncontrado.isContratoActivo())) {
@@ -26,7 +26,7 @@ public class GestionContratos {
             }
             o.setCedulaCliente(Cedula);
             System.out.println("Ingrese la placa del vehiculo ");
-            String Placa = v.TextoNoVacio(sc);
+            String Placa = v.TextoAlfanumerico(sc);
             Vehiculo VehiculoEncontrado = v.BuscarEnVehiculos(ListaVehiculos, Placa);
             if (v.ValidarExistencia(VehiculoEncontrado)) {
                 if (v.ContratoActivo(VehiculoEncontrado.isContratoActivo())) {
@@ -54,44 +54,50 @@ public class GestionContratos {
 
         while (Control) {
             System.out.println("Que contrato desea modificar ");
-            int Contrato = v.ValidarEntero(sc);
+            int Contrato = v.ValidarEnteroPositivo(sc);
             for (ContratoRenting c : ListaContratos) {
                 if (Contrato == c.getIdContrato()) {
                     System.out.println("Que desea modificar del contrato? ");// SI SE CAMBIA EL FORMATO DE LAS FECHAS,
                                                                              // QUITAR EL TOTAL DE DIAS Y VALOR TOTAL
                     System.out.println(" 1. Cliente \n 2. Placa Vehiculo \n 3. Fechas \n 4. ID Contrato");
-                    int Cambio = v.ValidarRango(1,4,sc);
+                    int Cambio = v.ValidarRango(1, 4, sc);
                     switch (Cambio) {
                         case 1:
                             System.out.println("Ingrese la cedula que va a cambiar ");
-                            int Cedula = v.ValidarEntero(sc);
+                            int Cedula = v.ValidarCedulaInt(sc);
                             Cliente encontrado = v.BuscarEnClientes(ListaClientes, Cedula);
                             if (encontrado != null) {
                                 System.out.println("Ingrese la cedula nueva: ");
-                                int CedulaNueva = v.ValidarEntero(sc);
+                                int CedulaNueva = v.ValidarCedulaInt(sc);
                                 Cliente clienteduplicado = v.BuscarEnClientes(ListaClientes, CedulaNueva);
-                                if(clienteduplicado != null){
-                                    System.out.println("No se puede repetir cedulas. Ya existe un cliente con esta cedula ");
+                                if (v.ContratoActivo(clienteduplicado.isContratoActivo())) {
+                                    continue;
+                                }
+                                if (clienteduplicado != null) {
+                                    System.out.println(
+                                            "No se puede repetir cedulas. Ya existe un cliente con esta cedula ");
                                     break;
                                 }
                                 c.setCedulaCliente(CedulaNueva);
                                 System.out.println("CAMBIO EXITOSO");
                                 Control = false;
-                            } else {
-                                System.out.println("Escriba una cedula correcta");
                             }
                             break;
 
                         case 2:
                             System.out.println("Ingrese la Placa a cambiar: ");
-                            String Placa = v.TextoNoVacio(sc);
+                            String Placa = v.TextoAlfanumerico(sc);
                             VehiculoEncontrado = v.BuscarEnVehiculos(ListaVehiculos, Placa);
                             if (VehiculoEncontrado != null) {
                                 System.out.println("Ingrese la Placa nueva: ");
-                                String PlacaNueva = v.TextoNoVacio(sc);
+                                String PlacaNueva = v.TextoAlfanumerico(sc);
                                 Vehiculo placaduplicada = v.BuscarEnVehiculos(ListaVehiculos, PlacaNueva);
-                                if(placaduplicada != null){
-                                    System.out.println("No puede repetir Placas, Ya existe un vehiculo con esta placa ");
+                                if (v.ContratoActivo(placaduplicada.isContratoActivo())) {
+                                    continue;
+                                }
+                                if (placaduplicada != null) {
+                                    System.out
+                                            .println("No puede repetir Placas, Ya existe un vehiculo con esta placa ");
                                     break;
                                 }
                                 c.setPlacaVehiculo(PlacaNueva);
@@ -110,16 +116,17 @@ public class GestionContratos {
 
                         default:
                             System.out.println("Ingrese la cedula nueva: ");
-                            int ContratoNuevo = v.ValidarEntero(sc);
+                            int ContratoNuevo = v.ValidarEnteroPositivo(sc);
                             ContratoRenting contratoduplicado = v.BuscarEnContratos(ListaContratos, ContratoNuevo);
-                            if(contratoduplicado != null){
-                                System.out.println("No se puede repetir cedulas. Ya existe un cliente con esta cedula ");
-                                break;}
+                            if (contratoduplicado != null) {
+                                System.out
+                                        .println("No se puede repetir cedulas. Ya existe un cliente con esta cedula ");
+                                break;
+                            }
                             c.setIdContrato(ContratoNuevo);
                             break;
                     }
-                }
-                else{
+                } else {
                     System.out.println("Ese contrato no existe");
                 }
             }
@@ -128,14 +135,20 @@ public class GestionContratos {
     }
 
     public LinkedList<ContratoRenting> FinalizarContrato(LinkedList<ContratoRenting> ListaContratos,
-            LinkedList<Vehiculo> ListaVehiculos, Scanner sc) {
+            LinkedList<Vehiculo> ListaVehiculos, Scanner sc, LinkedList<Cliente> ListaClientes) {
         boolean continuar = true;
         while (continuar) {
             System.out.println("Ingrese el contrato a finalizar ");
-            int Contrato = v.ValidarEntero(sc);
+            int Contrato = v.ValidarEnteroPositivo(sc);
             ContratoRenting encontrado = v.BuscarEnContratos(ListaContratos, Contrato);
             if (encontrado != null) {
-                ListaContratos.removeIf(c -> Contrato == c.getIdContrato());
+                Cliente C = v.BuscarEnClientes(ListaClientes, encontrado.getCedulaCliente());
+                Vehiculo V = v.BuscarEnVehiculos(ListaVehiculos, encontrado.getPlacaVehiculo());
+                if (C != null)
+                    C.setContratoActivo(false);
+                if (V != null)
+                    V.setContratoActivo(false);
+                ListaContratos.removeIf(cont -> Contrato == cont.getIdContrato());
                 System.out.println("CONTRATO ELIMINADO");
                 continuar = false;
             } else {
@@ -148,7 +161,7 @@ public class GestionContratos {
     public void BuscarContrato(LinkedList<ContratoRenting> ListaContratos, Scanner sc,
             LinkedList<Cliente> ListaClientes) {
         System.out.println("Ingrese el ID del contrato que desea mirar su informacion ");
-        int IdContrato = v.ValidarEntero(sc);
+        int IdContrato = v.ValidarEnteroPositivo(sc);
         ContratoRenting contrato = v.BuscarEnContratos(ListaContratos, IdContrato);
         boolean continuar = true;
         while (continuar) {

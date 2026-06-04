@@ -11,7 +11,7 @@ public class GestionVehiculos {
         while (continuar) {
 
             System.out.println("Ingrese la placa del vehiculo ");
-            String Placa = v.TextoNoVacio(sc);
+            String Placa = v.TextoAlfanumerico(sc);
             Vehiculo VehiculoEncontrado = v.BuscarEnVehiculos(ListaVehiculos, Placa);
             if (v.ValidarExistencia(VehiculoEncontrado)) {
                 continue;
@@ -19,9 +19,9 @@ public class GestionVehiculos {
             System.out.println("Ingrese la marca ");
             String Marca = v.TextoNoVacio(sc);
             System.out.println("Ingrese el modelo");
-            int Modelo = v.ValidarEntero(sc);
+            int Modelo = v.ValidarEnteroPositivo(sc);
             System.out.println("Ingrese el precio diario del vehiculo ");
-            float PrecioDiario = v.ValidarDecimal(sc);
+            float PrecioDiario = v.ValidarDecimalPositivo(sc);
             boolean ContratoActivo = false;
             System.out.println("Que está ingresando\n 1) Carro Sedan \n 2) Camioneta SUV");
             int opt = v.ValidarRango(1, 2, sc);
@@ -44,9 +44,9 @@ public class GestionVehiculos {
 
                 default:
                     System.out.println("Ingrese el tipo de traccion ");
-                    String Traccion = v.TextoNoVacio(sc);
+                    String Traccion = v.TextoAlfanumerico(sc);
                     System.out.println("Ingrese la capacidad de maletero ");
-                    int capacidad = v.ValidarEntero(sc);
+                    int capacidad = v.ValidarEnteroPositivo(sc);
                     NuevoVehiculo = new CamionetaSUV(Placa, Marca, Modelo, PrecioDiario, ContratoActivo, Traccion,
                             capacidad);
                     System.out.println("Quiere seguir ingresando vehiculos? \n 1) Si \n 2) No");
@@ -77,7 +77,7 @@ public class GestionVehiculos {
         Vehiculo VehiculoEncontrado = null;
         while (Control) {
             System.out.println("Ingrese la placa del vehiculo que desea modificar ");
-            String Placa = v.TextoNoVacio(sc);
+            String Placa = v.TextoAlfanumerico(sc);
             VehiculoEncontrado = v.BuscarEnVehiculos(ListaVehiculos, Placa);
             if (v.ValidarExistencia(VehiculoEncontrado) == false) {
                 System.out.println("El vehiculo no está en la lista ");
@@ -99,13 +99,13 @@ public class GestionVehiculos {
 
                         case 2:
                             System.out.println("Ingrese el Modelo: ");
-                            int Modelo = v.ValidarEntero(sc);
+                            int Modelo = v.ValidarEnteroPositivo(sc);
                             carro.setModelo(Modelo);
                             break;
 
                         case 3:
                             System.out.println("Ingrese el Precio diario: ");
-                            float Precio = sc.nextFloat();
+                            float Precio = v.ValidarDecimalPositivo(sc);
                             carro.setPrecioDiario(Precio);
                             break;
 
@@ -116,12 +116,12 @@ public class GestionVehiculos {
                                 System.out.println("Ingrese el tipo de traccion ");
                                 SUV.setTipoTraccion(v.TextoNoVacio(sc));
                                 System.out.println("Ingrese la capacidad del maletero ");
-                                SUV.setCapacidadMaletero(v.ValidarEntero(sc));
+                                SUV.setCapacidadMaletero(v.ValidarEnteroPositivo(sc));
                             } else {
                                 CarroSedan Sedan = (CarroSedan) carro;
                                 System.out.println("Modificando Sedan");
                                 System.out.println("Ingrese el tipo de combustible ");
-                                Sedan.setTipoCombustible(v.TextoNoVacio(sc));
+                                Sedan.setTipoCombustible(v.TextoAlfanumerico(sc));
                                 System.out.println("Ingrese el tipo de transmision ");
                                 Sedan.setTransmision(v.TextoNoVacio(sc));
                             }
@@ -129,7 +129,7 @@ public class GestionVehiculos {
 
                         default:
                             System.out.println("Ingrese la placa nueva: ");
-                            String PlacaNueva = v.TextoNoVacio(sc);
+                            String PlacaNueva = v.TextoAlfanumerico(sc);
                             Vehiculo placaduplicada = v.BuscarEnVehiculos(ListaVehiculos, PlacaNueva);
                             if(placaduplicada != null){
                                 System.out.println("No se puede repetir cedulas. Ya existe un cliente con esta cedula ");
@@ -144,13 +144,24 @@ public class GestionVehiculos {
     }
 
     public LinkedList<Vehiculo> EliminarVehiculo(LinkedList<Vehiculo> ListaVehiculos,
-            LinkedList<ContratoRenting> ListaContratos, Scanner sc) {
+            LinkedList<ContratoRenting> ListaContratos, Scanner sc, LinkedList<Cliente> ListaClientes) {
         boolean continuar = true;
         while (continuar) {
             System.out.println("Ingrese la placa del vehiculo a eliminar ");
-            String Placa = v.TextoNoVacio(sc);
+            String Placa = v.TextoAlfanumerico(sc);
             Vehiculo encontrado = v.BuscarEnVehiculos(ListaVehiculos, Placa);
             if (encontrado != null) {
+                if (encontrado.isContratoActivo()){
+                    System.out.println("No se puede eliminar porque tiene un contrato activo. Desea eliminar el contrato? \n 1) Si. \n 2). No ");
+                    int opt = v.ValidarRango(1, 2, sc);
+                    if (opt == 1){
+                        GestionContratos gc = new GestionContratos();
+                        gc.FinalizarContrato(ListaContratos, ListaVehiculos, sc, ListaClientes);
+                    }
+                    else{
+                        return ListaVehiculos;
+                    }
+                }
                 ListaVehiculos.removeIf(v -> Placa.equalsIgnoreCase(v.getPlaca()));
                 System.out.println("VEHICULO ELIMINADO");
                 continuar = false;
@@ -166,7 +177,7 @@ public class GestionVehiculos {
 
         while (continuar) {
             System.out.println("Ingrese la placa del vehiculo que desea mirar su informacion ");
-            String Placa = v.TextoNoVacio(sc);
+            String Placa = v.TextoAlfanumerico(sc);
             Vehiculo vehiculo = v.BuscarEnVehiculos(ListaVehiculos, Placa);
             if (vehiculo != null) {
                 System.out.println("Marca: " + vehiculo.getMarca());
@@ -189,3 +200,4 @@ public class GestionVehiculos {
         }
     }
 }
+
