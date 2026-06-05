@@ -218,18 +218,18 @@ public class Validaciones {
     // ==========================
 
     public Cliente BuscarEnClientes(
-            LinkedList<Cliente> clientes,
-            int cedula) {
+        LinkedList<Cliente> clientes,
+        int cedula) {
 
-        for (Cliente c : clientes) {
+    for (Cliente c : clientes) {
 
-            if (String.valueOf(c.getCedula()).equals(cedula)) {
-                return c;
-            }
+        if (c.getCedula() == cedula) {
+            return c;
         }
-
-        return null;
     }
+
+    return null;
+}
 
     public Vehiculo BuscarEnVehiculos(
             LinkedList<Vehiculo> vehiculos,

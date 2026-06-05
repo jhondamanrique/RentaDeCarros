@@ -70,4 +70,16 @@ public class ContratoRenting {
         System.out.println("Total días: " + TotalDias);
         System.out.println("Valor total: " + ValorTotal);
     }
+
+    @Override
+    public String toString() {
+    return "ID Contrato: " + IdContrato +
+            "\nCedula Cliente: " + CedulaCliente +
+            "\nPlaca Vehiculo: " + PlacaVehiculo +
+            "\nFecha Inicio: " + FechaInicio +
+            "\nFecha Fin: " + FechaFin +
+            "\nDias: " + TotalDias +
+            "\nValor Total: " + ValorTotal +
+            "\n----------------------------------";
+    }
 }

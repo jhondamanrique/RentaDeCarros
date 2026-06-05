@@ -34,6 +34,7 @@ public class GestionContratos {
                 }
             }
             o.setPlacaVehiculo(Placa);
+            ClienteEncontrado.setContratoActivo(true);
             VehiculoEncontrado.setContratoActivo(true);
             o.setValorTotal(v.AsignacionFechas(o, VehiculoEncontrado.getPrecioDiario(), 1));
             ListaContratos.add(o);

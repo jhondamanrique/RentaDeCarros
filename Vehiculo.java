@@ -58,4 +58,13 @@ public class Vehiculo {
     public void setContratoActivo(boolean contratoActivo) {
         ContratoActivo = contratoActivo;
     }
+
+    @Override
+    public String toString() {
+    return "Placa: " + Placa +
+            "\nMarca: " + Marca +
+            "\nModelo: " + Modelo +
+            "\nPrecio Diario: " + PrecioDiario +
+            "\n----------------------------------";
+    }
 }

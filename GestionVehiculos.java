@@ -95,18 +95,24 @@ public class GestionVehiculos {
                             System.out.println("Ingrese la Marca: ");
                             String Marca = v.TextoNoVacio(sc);
                             carro.setMarca(Marca);
+                            System.out.println("Marca modificada");
+                            Control = false;    
                             break;
 
                         case 2:
                             System.out.println("Ingrese el Modelo: ");
                             int Modelo = v.ValidarEnteroPositivo(sc);
                             carro.setModelo(Modelo);
+                            System.out.println("Modelo modificado");
+                            Control = false;
                             break;
 
                         case 3:
                             System.out.println("Ingrese el Precio diario: ");
                             float Precio = v.ValidarDecimalPositivo(sc);
                             carro.setPrecioDiario(Precio);
+                            System.out.println("Precio diario modificado");
+                            Control = false;
                             break;
 
                         case 4:
@@ -125,6 +131,8 @@ public class GestionVehiculos {
                                 System.out.println("Ingrese el tipo de transmision ");
                                 Sedan.setTransmision(v.TextoNoVacio(sc));
                             }
+                            System.out.println("Atributos específicos modificados");
+                            Control = false;
                             break;
 
                         default:
@@ -135,6 +143,8 @@ public class GestionVehiculos {
                                 System.out.println("No se puede repetir cedulas. Ya existe un cliente con esta cedula ");
                                 break;}
                             carro.setPlaca(PlacaNueva);
+                            System.out.println("Placa modificada");
+                            Control = false;
                             break;
                     }
                 }
