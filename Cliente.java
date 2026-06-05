@@ -2,7 +2,7 @@ public class Cliente {
     private int  Cedula;
     private String Nombre;
     private String Apellido;
-    private int Telefono;
+    private String Telefono;
     private String Direccion;
     private boolean Licencia;
     private boolean ContratoActivo;
@@ -31,11 +31,11 @@ public class Cliente {
         Apellido = apellido;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return Telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         Telefono = telefono;
     }
 

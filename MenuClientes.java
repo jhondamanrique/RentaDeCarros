@@ -18,7 +18,7 @@ public class MenuClientes {
             System.out.println("4) Buscar cliente");
             System.err.println("5) Volver al menu principal");
             System.out.println("Seleccione una opción:");
-            opt = v.ValidarEnteroPositivo(sc);
+        
             opt = v.ValidarRango(1, 5, sc);
             switch (opt){
                 case 1:

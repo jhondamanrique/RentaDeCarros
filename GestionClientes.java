@@ -21,7 +21,7 @@ public class GestionClientes {
             System.out.println("Ingrese el apellido ");
             c.setApellido(v.Solotexto(sc));
             System.out.println("Ingrese el telefono");
-            c.setTelefono(v.ValidarEnteroPositivo(sc));
+            c.setTelefono(v.ValidarTelefono(sc));
             System.out.println("Ingrese la direccion ");
             c.setDireccion(v.TextoNoVacio(sc));
             System.out.println("Tiene licencia \n 1) Si.\n 2) No.");
@@ -76,7 +76,7 @@ public class GestionClientes {
                         break;
                     case 3:
                         System.out.println("Ingrese el nuevo telefono ");
-                        int NuevoTelefono = v.ValidarEnteroPositivo(sc);
+                        String NuevoTelefono = v.ValidarTelefono(sc);
                         cdCliente.setTelefono(NuevoTelefono);
                         System.out.println("CAMBIO EXITOSO");
                         break;
