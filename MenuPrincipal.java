@@ -23,7 +23,6 @@ public class MenuPrincipal {
             System.out.println("4) Imprimir informe general");
             System.out.println("5) Salir del sistema");
             System.out.println("Seleccione una opción:");
-            opt = v.ValidarEnteroPositivo(sc);
             opt = v.ValidarRango(1, 5, sc);
             switch (opt){
                 case 1:

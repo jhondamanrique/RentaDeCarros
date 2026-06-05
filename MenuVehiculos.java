@@ -20,7 +20,6 @@ public class MenuVehiculos {
             System.out.println("5) Volver al menu principal");
             System.out.print("Seleccione una opcion: ");
 
-            opt = v.ValidarEnteroPositivo(sc);
             opt = v.ValidarRango(1, 5, sc);
 
             switch (opt) {
