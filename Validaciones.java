@@ -366,4 +366,18 @@ public class Validaciones {
         System.out.println("Total de días actualizado: " + totaldias);
         return totaldias * precioDiario;
     }
+    public String ValidarTelefono(Scanner sc) {
+    String telefono;
+
+    do {
+        telefono = sc.nextLine();
+
+        if (!telefono.matches("\\d{10}")) {
+            System.out.println("Ingrese un teléfono válido de 10 dígitos");
+        }
+
+    } while (!telefono.matches("\\d{10}"));
+
+    return telefono;
+}
 }
